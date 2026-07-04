@@ -1,0 +1,63 @@
+<div class="admin-page">
+  <div *ngIf="!isLoggedIn" class="login-box">
+    <h2>دخول الأدمن</h2>
+    <input type="password" [(ngModel)]="adminPassword" placeholder="الباسورد" (keyup.enter)="login()" />
+    <button (click)="login()">دخول</button>
+    <p class="error" *ngIf="loginError">{{ loginError }}</p>
+  </div>
+
+  <div *ngIf="isLoggedIn" class="admin-content">
+    <h2>{{ editingId ? 'تعديل مشروع' : 'إضافة مشروع جديد' }}</h2>
+
+    <form (ngSubmit)="submit()" class="product-form">
+      <label>اسم المشروع</label>
+      <input type="text" [(ngModel)]="form.name" name="name" required placeholder="مثال: Narcissus Apartments" />
+
+      <label>القطاع</label>
+      <select [(ngModel)]="form.sector" name="sector">
+        <option *ngFor="let key of sectorKeys" [value]="key">{{ sectorLabels[key] }}</option>
+      </select>
+
+      <label>نوع الشغل</label>
+      <select [(ngModel)]="form.workType" name="workType">
+        <option *ngFor="let key of workTypeKeys" [value]="key">{{ workTypeLabels[key] }}</option>
+      </select>
+
+      <label>الموقع</label>
+      <input type="text" [(ngModel)]="form.location" name="location" required placeholder="مثال: الرياض، السعودية" />
+
+      <label>الوصف</label>
+      <textarea [(ngModel)]="form.description" name="description" rows="4" required></textarea>
+
+      <label>الصور {{ editingId ? '(اختياري - سيب فاضي لو مش هتغيرها)' : '' }}</label>
+      <input type="file" multiple accept="image/*" (change)="onFilesSelected($event)" />
+      <p class="hint" *ngIf="selectedFiles.length">تم اختيار {{ selectedFiles.length }} صورة</p>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'جاري الحفظ...' : (editingId ? 'حفظ التعديل' : 'رفع المشروع') }}
+        </button>
+        <button type="button" *ngIf="editingId" (click)="cancelEdit()" class="btn-cancel">إلغاء</button>
+      </div>
+
+      <p class="message" *ngIf="message">{{ message }}</p>
+    </form>
+
+    <hr />
+
+    <h2>المشاريع الحالية ({{ products.length }})</h2>
+    <div class="products-table">
+      <div class="product-row" *ngFor="let p of products">
+        <img [src]="'http://localhost:5000' + p.images[0]" alt="{{ p.name }}" />
+        <div class="product-info">
+          <strong>{{ p.name }}</strong>
+          <span>{{ sectorLabels[p.sector] }} — {{ workTypeLabels[p.workType] }} — {{ p.location }}</span>
+        </div>
+        <div class="product-actions">
+          <button (click)="editProduct(p)">تعديل</button>
+          <button (click)="deleteProduct(p._id!)" class="btn-delete">حذف</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

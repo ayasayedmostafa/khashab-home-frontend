@@ -1,0 +1,34 @@
+<div class="details-page">
+  <div *ngIf="isLoading" class="loading">جاري التحميل...</div>
+
+  <div *ngIf="notFound" class="not-found">
+    <p>هذا المشروع غير موجود</p>
+    <a routerLink="/products">العودة لكل الأعمال</a>
+  </div>
+
+  <div class="details-content" *ngIf="product && !isLoading">
+    <div class="gallery">
+      <img [src]="activeImage" class="main-image" alt="{{ product.name }}" />
+      <div class="thumbnails" *ngIf="product.images.length > 1">
+        <img *ngFor="let img of product.images"
+             [src]="imageUrl(img)"
+             (click)="setActiveImage(img)"
+             [class.active]="imageUrl(img) === activeImage" />
+      </div>
+    </div>
+
+    <div class="info">
+      <span class="tag">{{ sectorLabels[product.sector] }}</span>
+      <span class="tag tag-secondary">{{ workTypeLabels[product.workType] }}</span>
+      <h1>{{ product.name }}</h1>
+      <p class="location">📍 {{ product.location }}</p>
+      <p class="description">{{ product.description }}</p>
+
+      <a [href]="whatsappLink" target="_blank" class="btn-whatsapp">
+        اسأل عن هذا المشروع على واتساب
+      </a>
+
+      <a routerLink="/products" class="back-link">← العودة لكل الأعمال</a>
+    </div>
+  </div>
+</div>
