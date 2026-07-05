@@ -11,20 +11,25 @@ import { ProductService, Product, Sector, WorkType, SECTOR_LABELS, WORKTYPE_LABE
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
+
+  // ===== Login =====
   adminPassword = '';
   isLoggedIn = false;
   loginError = '';
 
+  // ===== Data =====
   products: Product[] = [];
   selectedFiles: File[] = [];
   editingId: string | null = null;
 
+  // ===== Labels =====
   sectorLabels = SECTOR_LABELS;
   sectorKeys: Sector[] = ['hospitality', 'residential', 'office', 'retail', 'healthcare'];
 
   workTypeLabels = WORKTYPE_LABELS;
   workTypeKeys: WorkType[] = ['wall-cladding', 'custom-furniture', 'kitchens-closets', 'doors-facades', 'office-fitout'];
 
+  // ===== Form =====
   form = {
     name: '',
     sector: 'residential' as Sector,
@@ -33,18 +38,36 @@ export class AdminComponent {
     description: ''
   };
 
+  // ===== UI state =====
   isSubmitting = false;
   message = '';
 
   constructor(private productService: ProductService) {}
 
+  // =========================
+  // LOGIN (FIXED)
+  // =========================
   login() {
-    if (!this.adminPassword) return;
+    if (!this.adminPassword) {
+      this.loginError = 'اكتبي الباسورد';
+      return;
+    }
+
+    const correctPassword = '1234';
+
+    if (this.adminPassword !== correctPassword) {
+      this.loginError = 'الباسورد غلط';
+      return;
+    }
+
     this.isLoggedIn = true;
     this.loginError = '';
     this.loadProducts();
   }
 
+  // =========================
+  // LOAD PRODUCTS
+  // =========================
   loadProducts() {
     this.productService.getAllProducts().subscribe({
       next: (data) => (this.products = data),
@@ -52,6 +75,9 @@ export class AdminComponent {
     });
   }
 
+  // =========================
+  // FILE UPLOAD
+  // =========================
   onFilesSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files) {
@@ -59,11 +85,15 @@ export class AdminComponent {
     }
   }
 
+  // =========================
+  // SUBMIT (CREATE / UPDATE)
+  // =========================
   submit() {
     if (!this.form.name || !this.form.description || !this.form.location) {
       this.message = 'من فضلك املأ كل الحقول';
       return;
     }
+
     if (!this.editingId && this.selectedFiles.length === 0) {
       this.message = 'من فضلك اختر صورة واحدة على الأقل';
       return;
@@ -75,6 +105,7 @@ export class AdminComponent {
     formData.append('workType', this.form.workType);
     formData.append('location', this.form.location);
     formData.append('description', this.form.description);
+
     this.selectedFiles.forEach((file) => formData.append('images', file));
 
     this.isSubmitting = true;
@@ -97,6 +128,9 @@ export class AdminComponent {
     });
   }
 
+  // =========================
+  // EDIT
+  // =========================
   editProduct(product: Product) {
     this.editingId = product._id!;
     this.form = {
@@ -110,8 +144,12 @@ export class AdminComponent {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  // =========================
+  // DELETE
+  // =========================
   deleteProduct(id: string) {
     if (!confirm('متأكد إنك عايز تحذف المشروع ده؟')) return;
+
     this.productService.deleteProduct(id, this.adminPassword).subscribe({
       next: () => {
         this.message = 'تم الحذف';
@@ -121,9 +159,18 @@ export class AdminComponent {
     });
   }
 
+  // =========================
+  // RESET
+  // =========================
   resetForm() {
     this.editingId = null;
-    this.form = { name: '', sector: 'residential', workType: 'custom-furniture', location: '', description: '' };
+    this.form = {
+      name: '',
+      sector: 'residential',
+      workType: 'custom-furniture',
+      location: '',
+      description: ''
+    };
     this.selectedFiles = [];
   }
 
