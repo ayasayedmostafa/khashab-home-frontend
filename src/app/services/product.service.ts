@@ -36,7 +36,7 @@ export const WORKTYPE_LABELS: Record<WorkType, string> = {
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:5000/api/products';
+ private apiUrl = 'https://khashab-home-backend-production-71d8.up.railway.app/api/products';
 
   constructor(private http: HttpClient) {}
 

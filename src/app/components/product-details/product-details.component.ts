@@ -38,7 +38,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   imageUrl(path: string): string {
-    return 'http://localhost:5000' + path;
+    return '' + path;
   }
 
   setActiveImage(path: string) {

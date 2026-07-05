@@ -48,7 +48,7 @@
     <h2>المشاريع الحالية ({{ products.length }})</h2>
     <div class="products-table">
       <div class="product-row" *ngFor="let p of products">
-        <img [src]="'http://localhost:5000' + p.images[0]" alt="{{ p.name }}" />
+       <img [src]="'https://khashab-home-backend-production-71d8.up.railway.app' + p.images[0]" alt="{{ p.name }}" />
         <div class="product-info">
           <strong>{{ p.name }}</strong>
           <span>{{ sectorLabels[p.sector] }} — {{ workTypeLabels[p.workType] }} — {{ p.location }}</span>

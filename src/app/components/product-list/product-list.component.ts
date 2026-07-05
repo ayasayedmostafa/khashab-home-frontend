@@ -44,6 +44,6 @@ export class ProductListComponent implements OnInit {
   }
 
   imageUrl(path: string): string {
-    return 'http://localhost:5000' + path;
-  }
+  return 'https://khashab-home-backend-production-71d8.up.railway.app' + path;
+}
 }
