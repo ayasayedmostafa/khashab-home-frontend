@@ -49,7 +49,7 @@ export class AdminComponent {
   // =========================
   login() {
     if (!this.adminPassword) {
-      this.loginError = 'اكتبي الباسورد';
+      this.loginError = 'اكتب الباسورد';
       return;
     }
 
@@ -178,4 +178,3 @@ export class AdminComponent {
     this.resetForm();
   }
 }
-Khashab2026!
