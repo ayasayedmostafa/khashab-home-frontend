@@ -1,12 +1,24 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/google*.html",
-      "destination": "/google*.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "server.js",
+      "use": "@vercel/node",
+      "config": {
+      "includeFiles": [
+        "Data/**",
+        "api/**",
+        "functions/**",
+        "SWagger/**",
+        "views/**",
+        "swagger.json",
+        "node_modules/swagger-ui-dist/**"
+]
+
+      }
     }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "server.js" }
   ]
 }
