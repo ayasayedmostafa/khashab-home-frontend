@@ -53,7 +53,7 @@ export class AdminComponent {
       return;
     }
 
-    const correctPassword = '';
+    const correctPassword = 'Khashab2026!';
 
     if (this.adminPassword !== correctPassword) {
       this.loginError = 'الباسورد غلط';
@@ -128,9 +128,7 @@ export class AdminComponent {
     });
   }
 
-  // =========================
-  // EDIT
-  // =========================
+
   editProduct(product: Product) {
     this.editingId = product._id!;
     this.form = {
