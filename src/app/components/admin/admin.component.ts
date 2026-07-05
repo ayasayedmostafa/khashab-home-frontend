@@ -53,7 +53,7 @@ export class AdminComponent {
       return;
     }
 
-    const correctPassword = '1234';
+    const correctPassword = '';
 
     if (this.adminPassword !== correctPassword) {
       this.loginError = 'الباسورد غلط';
@@ -178,3 +178,4 @@ export class AdminComponent {
     this.resetForm();
   }
 }
+Khashab2026!
