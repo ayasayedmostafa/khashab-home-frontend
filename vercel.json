@@ -1,13 +1,12 @@
 {
-  "routes": [
-    { "handle": "filesystem" },
+  "rewrites": [
     {
-      "src": "/google*.html",
-      "dest": "/google*.html"
+      "source": "/google*.html",
+      "destination": "/google*.html"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
