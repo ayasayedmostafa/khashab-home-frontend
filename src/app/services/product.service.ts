@@ -66,4 +66,10 @@ export class ProductService {
     const headers = new HttpHeaders({ 'admin-password': adminPassword });
     return this.http.delete(`${this.apiUrl}/${id}`, { headers });
   }
+  loginAdmin(password: string) {
+  return this.http.post<any>(
+    `${this.apiUrl.replace('/api/products', '')}/api/auth/admin-login`,
+    { password }
+  );
+}
 }

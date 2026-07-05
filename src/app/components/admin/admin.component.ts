@@ -45,7 +45,7 @@ export class AdminComponent {
   constructor(private productService: ProductService) {}
 
   // =========================
-  // LOGIN (FIXED)
+  // LOGIN (CORRECT)
   // =========================
   login() {
     if (!this.adminPassword) {
@@ -53,16 +53,20 @@ export class AdminComponent {
       return;
     }
 
-    const correctPassword = 'Khashab2026!';
-
-    if (this.adminPassword !== correctPassword) {
-      this.loginError = 'الباسورد غلط';
-      return;
-    }
-
-    this.isLoggedIn = true;
-    this.loginError = '';
-    this.loadProducts();
+    this.productService.loginAdmin(this.adminPassword).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.isLoggedIn = true;
+          this.loginError = '';
+          this.loadProducts();
+        } else {
+          this.loginError = 'الباسورد غلط';
+        }
+      },
+      error: () => {
+        this.loginError = 'الباسورد غلط';
+      }
+    });
   }
 
   // =========================
@@ -86,7 +90,7 @@ export class AdminComponent {
   }
 
   // =========================
-  // SUBMIT (CREATE / UPDATE)
+  // SUBMIT
   // =========================
   submit() {
     if (!this.form.name || !this.form.description || !this.form.location) {
@@ -116,19 +120,21 @@ export class AdminComponent {
 
     request$.subscribe({
       next: () => {
-        this.message = this.editingId ? 'تم تعديل المشروع بنجاح' : 'تم رفع المشروع بنجاح';
+        this.message = this.editingId ? 'تم التعديل بنجاح' : 'تم الرفع بنجاح';
         this.resetForm();
         this.loadProducts();
         this.isSubmitting = false;
       },
       error: (err) => {
-        this.message = err.status === 403 ? 'الباسورد غلط' : 'حصل خطأ، حاول تاني';
+        this.message = err.status === 403 ? 'الباسورد غلط' : 'حصل خطأ';
         this.isSubmitting = false;
       }
     });
   }
 
-
+  // =========================
+  // EDIT
+  // =========================
   editProduct(product: Product) {
     this.editingId = product._id!;
     this.form = {
@@ -138,6 +144,7 @@ export class AdminComponent {
       location: product.location,
       description: product.description
     };
+
     this.selectedFiles = [];
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
