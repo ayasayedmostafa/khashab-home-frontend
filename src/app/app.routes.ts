@@ -8,6 +8,7 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'admin-athath-2026', component: AdminComponent },
+  
   { path: '**', redirectTo: '' }
 ];
