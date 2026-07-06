@@ -136,5 +136,40 @@
 .menu-backdrop.is-open{opacity:1;pointer-events:auto;}
 
 @media(min-width:900px){
-  .menu-panel{width:280px;}
+  .site-header-bar{
+    background:transparent;
+    border-bottom:none;
+    padding:14px 24px;
+  }
+  .site-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--header-bg);
+    border-bottom:1px solid var(--header-line);
+  }
+  .menu-btn{display:none;}
+  .menu-panel{
+    position:static;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:4px;
+    width:auto;
+    max-height:none;
+    overflow:visible;
+    opacity:1;
+    transform:none;
+    box-shadow:none;
+    background:transparent;
+    padding:0 24px 0 0;
+  }
+  .menu-panel a{
+    padding:10px 16px;
+    justify-content:center;
+    text-align:center;
+    font-size:15px;
+    border-radius:10px;
+  }
+  .menu-backdrop{display:none;}
 }

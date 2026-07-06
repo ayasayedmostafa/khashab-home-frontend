@@ -69,7 +69,7 @@
 
 .hero-rings{
   position:absolute;
-  left:-140px;
+  left:0;
   top:50%;
   width:560px;height:560px;
   transform:translateY(-50%) rotate(-6deg);
@@ -192,6 +192,8 @@
 
 /* ===== MARQUEE ===== */
 .marquee{
+  width:100vw;
+  margin-inline:calc(50% - 50vw);
   background:var(--sand);
   border-top:1px solid var(--sand-line);
   border-bottom:1px solid var(--sand-line);
@@ -409,7 +411,7 @@
   .hero-rings{width:340px;height:340px;left:-100px;opacity:.5;}
   .hero-vertical-label{display:none;}
   .brand-title{font-size:46px;}
-  .hero-badge{left:24px;bottom:-30px;width:100px;height:100px;}
+  .hero-badge{left:24px;bottom:24px;width:100px;height:100px;}
   .hero-badge-num{font-size:26px;}
   .shelf{grid-template-columns:repeat(2,1fr);}
   .cat-card:nth-child(2),.cat-card:nth-child(4){transform:none;}
