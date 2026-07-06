@@ -43,7 +43,11 @@ export class ProductListComponent implements OnInit {
     this.loadProducts();
   }
 
-  imageUrl(path: string): string {
+ imageUrl(path: string): string {
+  if (!path) return '';
+  if (path.startsWith('http')) {
+    return path;
+  }
   return 'https://khashab-home-backend-production-71d8.up.railway.app' + path;
 }
 }
