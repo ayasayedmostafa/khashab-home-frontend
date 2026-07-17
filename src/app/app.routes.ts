@@ -8,7 +8,7 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
-  { path: 'admin-athath-2026', component: AdminComponent },
-  
+  { path: 'khashab-manage-secure', component: AdminComponent },
+
   { path: '**', redirectTo: '' }
 ];
