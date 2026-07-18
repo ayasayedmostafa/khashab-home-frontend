@@ -192,8 +192,8 @@
 
 /* ===== MARQUEE ===== */
 .marquee{
-  width:100vw;
-  margin-inline:calc(50% - 50vw);
+  
+  width:100%;
   background:var(--sand);
   border-top:1px solid var(--sand-line);
   border-bottom:1px solid var(--sand-line);
