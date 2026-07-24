@@ -36,8 +36,7 @@ export const WORKTYPE_LABELS: Record<WorkType, string> = {
   providedIn: 'root'
 })
 export class ProductService {
- private apiUrl = 'https://khashab-home-backend-production-71d8.up.railway.app/api/products';
-
+ private apiUrl = 'https://khashab-home-backend-production-bce4.up.railway.app/api/products';
   constructor(private http: HttpClient) {}
 
   getAllProducts(sector?: string, workType?: string): Observable<Product[]> {
