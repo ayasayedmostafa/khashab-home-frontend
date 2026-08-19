@@ -42,7 +42,7 @@ export class ProductDetailsComponent implements OnInit {
   if (path.startsWith('http')) {
     return path;
   }
-  return 'https://khashab-home-backend-production-71d8.up.railway.app' + path;
+  return 'https://khashab-home-backend.onrender.com' + path;
 }
 
   setActiveImage(path: string) {

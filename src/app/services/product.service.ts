@@ -35,9 +35,11 @@ export const WORKTYPE_LABELS: Record<WorkType, string> = {
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
- private apiUrl = 'https://khashab-home-backend-production-bce4.up.railway.app/api/products';
+ private apiUrl = 'https://khashab-home-backend.onrender.com/api/products';
   constructor(private http: HttpClient) {}
+
 
   getAllProducts(sector?: string, workType?: string): Observable<Product[]> {
     const params: string[] = [];
